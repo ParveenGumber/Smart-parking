@@ -1,0 +1,293 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Smart Parking and Vehicle Management System"
+    />
+    <title>ParkSmart | Parking Management</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">P</div>
+        <div>
+          <h2>ParkSmart</h2>
+          <span>Management System</span>
+        </div>
+      </div>
+
+      <div class="nav-label">MAIN MENU</div>
+
+      <nav class="navigation">
+        <a href="#dashboard" class="nav-item active">
+          <span>▦</span> Dashboard
+        </a>
+        <a href="#parking" class="nav-item"> <span>▤</span> Parking Slots </a>
+        <a href="#vehicle-entry" class="nav-item">
+          <span>＋</span> Vehicle Entry
+        </a>
+        <a href="#history" class="nav-item"> <span>◷</span> Parking History </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="status-indicator"></div>
+        <div>
+          <strong>System Online</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PARKING MANAGEMENT</p>
+          <h1>Dashboard</h1>
+        </div>
+
+        <div class="topbar-right">
+          <div class="live-badge"></div>
+          <div class="avatar">PS</div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="welcome-section">
+        <div>
+          <h2>Parking Overview</h2>
+          <p>Monitor vehicles, parking availability and revenue.</p>
+        </div>
+        <div class="date-display" id="currentDate">Loading date...</div>
+      </section>
+
+      <!-- STATISTICS -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Total Parking Slots</span>
+            <div class="stat-icon purple">▦</div>
+          </div>
+          <h2 id="totalSlots">12</h2>
+          <p class="stat-note">Total capacity</p>
+          <div class="progress-track">
+            <div class="progress-fill purple-fill" style="width: 100%"></div>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Available Slots</span>
+            <div class="stat-icon green">✓</div>
+          </div>
+          <h2 id="availableSlots">12</h2>
+          <p class="stat-note">Ready for parking</p>
+          <div class="progress-track">
+            <div
+              id="availableProgress"
+              class="progress-fill green-fill"
+              style="width: 100%"
+            ></div>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Occupied Slots</span>
+            <div class="stat-icon orange">🚗</div>
+          </div>
+          <h2 id="occupiedSlots">0</h2>
+          <p class="stat-note">Currently parked</p>
+          <div class="progress-track">
+            <div
+              id="occupiedProgress"
+              class="progress-fill orange-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span>Total Revenue</span>
+            <div class="stat-icon blue">₹</div>
+          </div>
+          <h2 id="totalRevenue">₹0</h2>
+          <p class="stat-note">Completed parking sessions</p>
+          <div class="progress-track">
+            <div class="progress-fill blue-fill" style="width: 65%"></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- PARKING AREA -->
+      <section id="parking" class="panel parking-panel">
+        <div class="section-heading">
+          <div>
+            <h2>Live Parking Layout</h2>
+            <p>View the status of every parking space.</p>
+          </div>
+
+          <div class="slot-legend">
+            <span><i class="legend-box available-box"></i> Available</span>
+            <span><i class="legend-box occupied-box"></i> Occupied</span>
+          </div>
+        </div>
+
+        <div class="parking-entrance"><span>↓</span> PARKING ENTRANCE</div>
+
+        <div id="parkingSlots" class="parking-grid"></div>
+
+        <div class="parking-footer">
+          <span>Parking capacity: <strong>12 vehicles</strong></span>
+          <span id="occupancyText">0% occupied</span>
+        </div>
+      </section>
+
+      <!-- ENTRY AND EXIT -->
+      <section class="forms-grid">
+        <article id="vehicle-entry" class="panel form-panel">
+          <div class="section-heading">
+            <div>
+              <h2>Vehicle Entry</h2>
+              <p>Register a vehicle entering the parking lot.</p>
+            </div>
+            <div class="form-icon entry-icon">↘</div>
+          </div>
+
+          <form id="entryForm">
+            <div class="form-group">
+              <label for="vehicleNumber">Vehicle Registration Number</label>
+              <input
+                type="text"
+                id="vehicleNumber"
+                placeholder="e.g. PB10AB1234"
+                maxlength="15"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="vehicleType">Vehicle Type</label>
+              <select id="vehicleType" required>
+                <option value="car">Car</option>
+                <option value="motorcycle">Motorcycle</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              + Register Vehicle
+            </button>
+          </form>
+        </article>
+
+        <article class="panel form-panel">
+          <div class="section-heading">
+            <div>
+              <h2>Vehicle Exit</h2>
+              <p>Process a vehicle leaving the parking lot.</p>
+            </div>
+            <div class="form-icon exit-icon">↗</div>
+          </div>
+
+          <form id="exitForm">
+            <div class="form-group">
+              <label for="exitVehicleNumber">Vehicle Registration Number</label>
+              <input
+                type="text"
+                id="exitVehicleNumber"
+                placeholder="Enter registered vehicle number"
+                maxlength="15"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Parking Fee</label>
+              <div class="fee-info">
+                <span>Cars</span>
+                <strong>₹40/hour</strong>
+                <span class="fee-divider">|</span>
+                <span>Motorcycles</span>
+                <strong>₹20/hour</strong>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark">
+              Process Vehicle Exit →
+            </button>
+          </form>
+        </article>
+      </section>
+
+      <!-- HISTORY -->
+      <section id="history" class="panel history-panel">
+        <div class="section-heading history-heading">
+          <div>
+            <h2>Parking History</h2>
+            <p>Track active vehicles and completed parking sessions.</p>
+          </div>
+          <button id="exportBtn" class="btn btn-outline" type="button">
+            ↓ Export CSV
+          </button>
+        </div>
+
+        <div class="history-controls">
+          <div class="search-box">
+            <span>⌕</span>
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Search vehicle number..."
+            />
+          </div>
+
+          <select id="filterStatus" aria-label="Filter parking status">
+            <option value="all">All Vehicles</option>
+            <option value="parked">Currently Parked</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>VEHICLE</th>
+                <th>TYPE</th>
+                <th>SLOT</th>
+                <th>ENTRY TIME</th>
+                <th>DURATION</th>
+                <th>FEE</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="historyTable">
+              <tr>
+                <td colspan="7" class="empty-state">
+                  No parking records yet. Register a vehicle to begin.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span id="recordCount">Showing 0 records</span>
+          <span>ParkSmart Management System</span>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <p>ParkSmart © 2026 | Smart Parking & Vehicle Management</p>
+
+      </footer>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
